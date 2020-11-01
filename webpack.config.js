@@ -2,6 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -10,8 +11,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "js/[name].js",
-        publicPath: 'https://localhost:3001/',
-        chunkFilename: 'js/[id].[chunkhash].js'
+        publicPath: "http://localhost:3001/",
+        chunkFilename: "js/[id].[chunkhash].js",
     },
     module: {
         rules: [
@@ -49,7 +50,12 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
-            chunkFilename: 'css/[id].css'
+            chunkFilename: "css/[id].css",
+        }),
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(__dirname, "dist/js/*.dll.js"),
+            outputPath: "js",
+            publicPath: "http://localhost:3001/js/",
         }),
     ],
 };
