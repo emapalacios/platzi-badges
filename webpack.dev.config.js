@@ -9,11 +9,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "js/[name].js",
-        publicPath: "dist/",
+        publicPath: "http://localhost:9000/",
         chunkFilename: "js/[id].[chunkhash].js",
     },
     devServer: {
-        contentCase: path.resolve(__dirname, "dist"),
+        contentBase: path.resolve(__dirname, "dist"),
         open: true,
         port: 9000,
         hot: true,
@@ -27,7 +27,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"],
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ],
             },
             {
                 test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
